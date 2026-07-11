@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>翠翠小精靈的數學空間 - 整數的乘法</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for Bold Sports Typo -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Noto+Sans+TC:wght@400;700;955&display=swap" rel="stylesheet">
+  <style>
+    /* 全網頁最低字型強制定為 18px，極度有利於平板閱讀與操作 */
+    * {
+      font-size: 18px;
+    }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: #0b0c10; /* 極簡曜石黑 */
+      color: #f1f5f9; /* 調亮預設文字顏色，防止吃力 */
+    }
+    
+    /* 大標題排版層次 */
+    .text-title-main {
+      font-size: 32px !important;
+      font-weight: 955;
+    }
+    .text-title-sub {
+      font-size: 28px !important;
+      font-weight: 700;
+    }
+    .text-large {
+      font-size: 22px !important;
+      font-weight: 700;
+    }
+    .text-huge-rule {
+      font-size: 26px !important;
+      font-weight: 950;
+    }
+
+    /* 運動風高飽和霓虹發光特效 - 增強亮度和對比度 */
+    .neon-text-cyan {
+      color: #00ffff;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    }
+    .neon-text-pink {
+      color: #ff1493;
+      text-shadow: 0 0 10px rgba(255, 20, 147, 0.8);
+    }
+    .neon-text-green {
+      color: #39ff14;
+      text-shadow: 0 0 10px rgba(57, 255, 20, 0.8);
+    }
+    .neon-text-yellow {
+      color: #ffea00;
+      text-shadow: 0 0 10px rgba(255, 234, 0, 0.8);
+    }
+
+    /* 高對比霓虹外框 */
+    .neon-border-cyan {
+      border: 3px solid #00ffff;
+      box-shadow: 0 0 14px rgba(0, 255, 255, 0.4);
+    }
+    .neon-border-pink {
+      border: 3px solid #ff1493;
+      box-shadow: 0 0 14px rgba(255, 20, 147, 0.4);
+    }
+    .neon-border-green {
+      border: 3px solid #39ff14;
+      box-shadow: 0 0 14px rgba(57, 255, 20, 0.4);
+    }
+
+    /* 運動風極簡按鈕 */
+    .btn-sports-cyan {
+      background: rgba(0, 255, 255, 0.08);
+      border: 2.5px solid #00ffff;
+      color: #00ffff;
+      transition: all 0.2s ease-out;
+    }
+    .btn-sports-cyan:hover, .btn-sports-cyan.active {
+      background: #00ffff;
+      color: #0b0c10;
+      box-shadow: 0 0 18px rgba(0, 255, 255, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .btn-sports-pink {
+      background: rgba(255, 20, 147, 0.08);
+      border: 2.5px solid #ff1493;
+      color: #ff1493;
+      transition: all 0.2s ease-out;
+    }
+    .btn-sports-pink:hover, .btn-sports-pink.active {
+      background: #ff1493;
+      color: #0b0c10;
+      box-shadow: 0 0 18px rgba(255, 20, 147, 0.6);
+      transform: translateY(-1px);
+    }
+
+    /* 叮嚀專用字體樣式 */
+    .text-hint-label {
+      font-size: 16px !important;
+      font-weight: 900 !important;
+    }
+    .text-hint-desc {
+      font-size: 21px !important;
+      font-weight: 700 !important;
+      line-height: 1.6 !important;
+    }
+
+    /* 運動控制項：高科技滑桿 */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: #1f2833;
+      border-radius: 8px;
+      height: 12px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      background: #00ffff;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffff;
+      border: 2px solid #fff;
+    }
+    input[type=range].slider-pink::-webkit-slider-thumb {
+      background: #ff1493;
+      box-shadow: 0 0 10px #ff1493;
+      border: 2px solid #fff;
+    }
+
+    /* 歷史成績滾動區域 */
+    .history-scroll {
+      max-height: 180px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body class="p-2 md:p-3"> <!-- 縮減最外層 padding，讓平板同屏更緊湊 -->
+
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- 標題區域 -->
+    <header class="text-center mb-1 border-b border-gray-800 pb-0.5">
+      <h1 class="text-title-main tracking-widest neon-text-cyan mb-1">
+        翠翠小精靈的數學空間
+      </h1>
+      <h2 class="text-title-sub text-white tracking-wide">
+        整數的乘法運算
+      </h2>
+    </header>
+
+    <!-- 翠翠小精靈導學區域 -->
+    <section class="mb-1.5 p-2 rounded-2xl bg-gray-950 neon-border-cyan flex flex-col md:flex-row items-center gap-3">
+      <div class="w-14 h-14 flex-shrink-0 bg-gradient-to-tr from-cyan-500 to-pink-500 rounded-full flex items-center justify-center shadow-[0_0_12px_#00ffff]">
+        <!-- 翠翠小精靈簡約 SVG -->
+        <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#39ff14" />
+          <path d="M8 11a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="#00ffff" />
+          <path d="M16 11a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="#00ffff" />
+          <path d="M12 17c1.5 0 2.5-1 2.5-2h-5c0 1 1 2 2.5 2z" fill="#ff1493" />
+        </svg>
+      </div>
+      <div>
+        <h3 class="text-large font-black text-white mb-0.5 flex items-center gap-2">
+          <span class="px-2 py-0.5 bg-cyan-500 text-black rounded text-xs font-black tracking-wider">GUIDE</span> 
+          翠翠小精靈 悄悄話：
+        </h3>
+        <p class="text-slate-100 leading-relaxed text-base">
+          「請點擊下方<b>【自學講堂】</b>題型，控制台參數會完全同步調整！快來動手拉拉滑桿觀察水庫水位變化吧！」
+        </p>
+      </div>
+    </section>
+
+    <!-- 1. 翠翠小精靈的水庫自學講堂與控制台 (同屏聯動，縮小下間距) -->
+    <section class="bg-gray-900 p-3.5 rounded-2xl border border-gray-800 shadow-xl mb-2">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- 左側：聯動題型選擇與自學解析 -->
+        <div class="flex flex-col justify-between">
+          <div>
+            <h4 class="text-large font-bold text-cyan-400 mb-3 flex items-center gap-2">
+              <span class="w-3.5 h-3.5 bg-cyan-400 rounded-full animate-ping"></span>
+              翠翠小精靈的水庫自學講堂
+            </h4>
+            <div class="grid grid-cols-4 gap-1.5 mb-3">
+              <button onclick="selectType(1)" id="btn-type1" class="btn-sports-cyan py-2 rounded-xl font-bold active">1. 正 × 正</button>
+              <button onclick="selectType(2)" id="btn-type2" class="btn-sports-cyan py-2 rounded-xl font-bold">2. 正 × 負</button>
+              <button onclick="selectType(3)" id="btn-type3" class="btn-sports-cyan py-2 rounded-xl font-bold">3. 負 × 正</button>
+              <button onclick="selectType(4)" id="btn-type4" class="btn-sports-cyan py-2 rounded-xl font-bold">4. 負 × 負</button>
+            </div>
+          </div>
+
+          <div class="bg-black/70 p-3 rounded-xl border border-gray-800 shadow-inner flex-grow min-h-[90px]">
+            <div id="type-lecture-content">
+              <!-- 由 JS 動態更換 -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 右側：探究控制台 (滑桿控制區) -->
+        <div class="flex flex-col justify-center border-t md:border-t-0 md:border-l border-gray-800 pt-3 md:pt-0 md:pl-6">
+          <h4 class="text-large font-bold text-white mb-4">探究控制台：水位與時間變化</h4>
+          
+          <!-- 滑桿 A：水位變化 -->
+          <div class="mb-4">
+            <div class="flex justify-between items-center mb-1">
+              <label class="font-bold text-cyan-300">水位變化 (公分/日)：</label>
+              <span id="valA-display" class="font-black text-cyan-400 Orbitron text-large">+4</span>
+            </div>
+            <input id="sliderA" type="range" min="-5" max="5" value="4" class="w-full cursor-pointer">
+            <!-- 標籤字體與顏色完全與中間 0 保持高度一致 -->
+            <div class="flex justify-between text-sm text-slate-300 mt-1">
+              <span class="font-bold text-slate-300">下降 -5</span>
+              <span class="font-bold text-slate-300">0 (不變)</span>
+              <span class="font-bold text-slate-300">上升 +5</span>
+            </div>
+          </div>
+
+          <!-- 滑桿 B：時間狀態 -->
+          <div class="mb-2">
+            <div class="flex justify-between items-center mb-1">
+              <label class="font-bold text-pink-300">時間狀態 (天)：</label>
+              <span id="valB-display" class="font-black text-pink-400 Orbitron text-large">+2</span>
+            </div>
+            <input id="sliderB" type="range" min="-5" max="5" value="2" class="w-full slider-pink cursor-pointer">
+            <!-- 標籤字體與顏色完全與中間 0 保持高度一體，且改為 5天前/5天後 -->
+            <div class="flex justify-between text-sm text-slate-300 mt-1">
+              <span class="font-bold text-slate-300">5 天前 (-5)</span>
+              <span class="font-bold text-slate-300">現在 (0)</span>
+              <span class="font-bold text-slate-300">5 天後 (+5)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. 極速水位數線跑道 (高度調教、與對齊 image_45c2dd.png 相同格式) -->
+    <section class="bg-gray-900 p-3.5 rounded-2xl border border-gray-800 shadow-xl mb-2 flex flex-col justify-between min-h-[220px]">
+      <div>
+        <h4 class="text-large font-bold text-white mb-2 flex items-center justify-between">
+          <span>極速水位數線跑道 (範圍：-25 到 +25)</span>
+          <span class="text-sm text-cyan-300 font-bold">水庫狀態：<span id="track-status" class="text-green-400 font-bold">水位上升</span></span>
+        </h4>
+
+        <!-- 算式解析面板 (調整為不對稱左右並排網格：左側 32% 算式，右側 68% 說明，深度優化高度，變為單行一行顯示) -->
+        <div class="p-2 rounded-xl bg-slate-950 border border-gray-700 text-center mb-1">
+          <div class="flex flex-row items-center justify-between text-left">
+            
+            <!-- 左側：算式 (32%) -->
+            <div class="w-[32%] font-black tracking-widest flex justify-center items-center gap-1.5 border-r border-gray-800 pr-4">
+              <span id="calcA" class="text-cyan-400 text-large">(+4)</span>
+              <span class="text-white text-large">×</span>
+              <span id="calcB" class="text-pink-400 text-large">(+2)</span>
+              <span class="text-white text-large">=</span>
+              <span id="calcResult" class="neon-text-green text-2xl font-black">(+8)</span>
+            </div>
+
+            <!-- 右側：說明 (68%，單行一行呈現，優化精煉字數) -->
+            <div id="verbalExplanation" class="w-[68%] text-white leading-snug text-base font-bold pl-4">
+              每天<b>上升 4 公分</b>，<b>2 天後</b>的水位比現在<b>高 8 公分</b>！
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 水庫動態 SVG (調整寬度為 920 以完美加寬單位長，數軸定位在 Y=45，大刻度完美結合，警示文字移到 Y=115 最下方) -->
+      <div class="relative w-full flex-grow flex items-center justify-center bg-black/95 rounded-xl p-2 border border-gray-800 overflow-hidden min-h-[140px]">
+        <svg id="reservoirSvg" class="w-full h-36" viewBox="0 0 920 140">
+          <!-- 網格背景 -->
+          <defs>
+            <pattern id="cleanGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#cleanGrid)" />
+
+          <!-- 水庫水位背景填滿 (零點對齊 460) -->
+          <rect id="waterFillPink" x="0" y="15" width="0" height="100" fill="rgba(255, 20, 147, 0.23)" />
+          <rect id="waterFillCyan" x="460" y="15" width="0" height="100" fill="rgba(0, 255, 255, 0.23)" />
+
+          <!-- 數線主軸 (定位在 Y=45，徹底重合) -->
+          <line x1="40" y1="45" x2="880" y2="45" stroke="#64748b" stroke-width="4.5" stroke-linecap="round" />
+          <!-- 右側正向箭頭 -->
+          <polygon points="875,37 895,45 875,53" fill="#00ffff" />
+
+          <!-- 刻度與數字 (動態渲染，-25 到 +25，stepPx = 16.8 完美加寬，十字結合) -->
+          <g id="ticks"></g>
+
+          <!-- 水位弧形軌跡線 (連動 Y=45 軸心) -->
+          <path id="motionArc" d="M 460 45 Q 460 45 460 45" fill="none" stroke="#39ff14" stroke-dasharray="5" stroke-width="3.5" class="transition-all duration-500" />
+
+          <!-- 零點中心起點 (黃色實心圓點) -->
+          <circle cx="460" cy="45" r="8" fill="#ffea00" />
+          
+          <!-- 翠翠小精靈載具 (對齊 Y=45 軸心，平滑滑行) -->
+          <g id="elfinSprite" transform="translate(460, 45)" class="transition-transform duration-500 ease-out">
+            <circle cx="0" cy="-26" r="24" fill="rgba(57, 255, 20, 0.2)" class="animate-pulse" />
+            <circle cx="0" cy="-26" r="16" fill="#1f2833" stroke="#39ff14" stroke-width="3" />
+            <!-- 精靈視線 -->
+            <g id="elfinEyes">
+              <circle cx="-5" cy="-28" r="2.5" fill="#00ffff" />
+              <circle cx="5" cy="-28" r="2.5" fill="#00ffff" />
+            </g>
+            <path d="M -13 -38 L -5 -31 M 13 -38 L 5 -31" stroke="#ff1493" stroke-width="2.5" />
+            <path d="M -4 -18 Q 0 -15 4 -18" fill="none" stroke="#ff1493" stroke-width="2.5" />
+          </g>
+
+          <!-- 警示文字移到數線下方 Y=115 (完美契合 image_45c2dd.png 排版，且改用中性對齊) -->
+          <text x="180" y="115" fill="#ff69b4" font-size="15" font-weight="black" text-anchor="middle">【 負 數 水 位 降 低 區 】</text>
+          <text x="740" y="115" fill="#00ffff" font-size="15" font-weight="black" text-anchor="middle">【 正 數 水 位 增 高 區 】</text>
+        </svg>
+      </div>
+
+      <div class="text-center mt-1.5 text-slate-300 text-sm">
+        💡 嘗試拖動上方控制台滑桿，小精靈會平滑滑動，且會浮現動態弧形水流軌跡！
+      </div>
+    </section>
+
+    <!-- 筆記區 -->
+    <section class="bg-gray-900 p-6 rounded-2xl border border-gray-800 mb-8 shadow-lg">
+      <h3 class="text-xl font-black text-center text-cyan-400 mb-6 tracking-widest">
+        📜 筆記區
+      </h3>
+      
+      <!-- 分頁切換 -->
+      <div class="flex gap-4 justify-center mb-6">
+        <button onclick="showProperty('rules')" id="btn-prop-rules" class="btn-sports-pink px-6 py-2.5 rounded-xl font-bold active">🎯 規則收斂</button>
+        <button onclick="showProperty('specials')" id="btn-prop-specials" class="btn-sports-pink px-6 py-2.5 rounded-xl font-bold">💡 特別情形</button>
+        <button onclick="showProperty('properties')" id="btn-prop-properties" class="btn-sports-pink px-6 py-2.5 rounded-xl font-bold">⚡ 乘法特性</button>
+      </div>
+
+      <!-- 性質展示板面 -->
+      <div class="bg-black/60 p-6 rounded-xl border border-gray-800 leading-relaxed">
+        
+        <!-- 🎯 規則收斂 -->
+        <div id="prop-content-rules" class="prop-content">
+          <h4 class="text-large font-bold neon-text-pink mb-4">🎯 【乘法符號規則大收斂】</h4>
+          <div class="flex flex-col gap-4">
+            
+            <!-- 上列：同號得正 -->
+            <div class="p-6 rounded-xl bg-emerald-950/40 border-2 border-emerald-500 text-center shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+              <span class="text-huge-rule font-black text-emerald-300 block tracking-wider mb-2">
+                兩數同號相乘，乘積為正整數。
+              </span>
+              <p class="text-white font-bold">也就是：正數 × 正數 ＝ 正數 ； 負數 × 負數 ＝ 正數</p>
+            </div>
+
+            <!-- 下列：異號得負 -->
+            <div class="p-6 rounded-xl bg-rose-950/40 border-2 border-rose-500 text-center shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+              <span class="text-huge-rule font-black text-rose-300 block tracking-wider mb-2">
+                兩數異號相乘，乘積為負整數。
+              </span>
+              <p class="text-white font-bold">也就是：正數 × 負數 ＝ 負數 ； 負數 × 正數 ＝ 負數</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 💡 特別情形 -->
+        <div id="prop-content-specials" class="prop-content hidden">
+          <h4 class="text-large font-bold neon-text-pink mb-4">💡 【整數乘法的特別情形】</h4>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <!-- 卡片 1 -->
+            <div class="p-4 bg-gray-955 rounded-lg border-l-4 border-yellow-400 flex flex-col justify-between">
+              <div>
+                <span class="text-xl md:text-2xl font-black text-yellow-300 block mb-1">✦ 與 0 的乘積</span>
+                <span class="text-base text-slate-100 font-bold block mb-2">任意整數與 0 的乘積都是 0。</span>
+              </div>
+              <div class="bg-black/40 p-3 rounded border border-gray-800 text-slate-300 text-sm font-semibold mt-auto leading-relaxed">
+                💡 範例：<br>
+                (-4) × 0 = 0<br>
+                0 × (-7) = 0<br>
+                0 × 0 = 0
+              </div>
+            </div>
+            
+            <!-- 卡片 2 -->
+            <div class="p-4 bg-gray-955 rounded-lg border-l-4 border-yellow-400 flex flex-col justify-between">
+              <div>
+                <span class="text-xl md:text-2xl font-black text-yellow-300 block mb-1">✦ 與 1 的乘積</span>
+                <span class="text-base text-slate-100 font-bold block mb-2">任意整數與 1 的乘積，都等於該整數本身。</span>
+              </div>
+              <div class="bg-black/40 p-3 rounded border border-gray-800 text-slate-300 text-sm font-semibold mt-auto leading-relaxed">
+                💡 範例：<br>
+                (-3) × 1 = -3<br>
+                1 × (-8) = -8
+              </div>
+            </div>
+            
+            <!-- 卡片 3 -->
+            <div class="p-4 bg-gray-955 rounded-lg border-l-4 border-yellow-400 flex flex-col justify-between">
+              <div>
+                <span class="text-xl md:text-2xl font-black text-yellow-300 block mb-1">✦ 與 -1 的乘積</span>
+                <span class="text-base text-slate-100 font-bold block mb-2">任意整數與 -1 的乘積，等於這個數的相反數（正變負、負變正）。</span>
+              </div>
+              <div class="bg-black/40 p-3 rounded border border-gray-800 text-slate-300 text-sm font-semibold mt-auto leading-relaxed">
+                💡 範例：<br>
+                (-6) × (-1) = 6<br>
+                (-1) × 2 = -2
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ⚡ 乘法特性 -->
+        <div id="prop-content-properties" class="prop-content hidden">
+          <h4 class="text-large font-bold neon-text-pink mb-4">⚡ 【整數的乘法特性】</h4>
+          <ul class="space-y-6">
+            
+            <li class="p-4 bg-gray-950 rounded-lg border-l-4 border-cyan-400">
+              <span class="text-xl md:text-2xl font-black text-cyan-300 block mb-1">✦ 乘法交換律 ➔ a × b = b × a</span>
+              <span class="text-lg text-slate-100 font-bold block mb-2">兩個整數相乘，交換乘數與被乘數的位置，其乘積不變。</span>
+              <div class="bg-black/40 p-3 rounded border border-gray-800 text-slate-300 text-base font-semibold leading-relaxed">
+                💡 範例：<br>
+                7 × (-2) = -14<br>
+                (-2) × 7 = -14
+              </div>
+            </li>
+            
+            <li class="p-4 bg-gray-950 rounded-lg border-l-4 border-cyan-400">
+              <span class="text-xl md:text-2xl font-black text-cyan-300 block mb-1">✦ 乘法結合律 ➔ (a × b) × c = a × (b × c)</span>
+              <span class="text-lg text-slate-100 font-bold block mb-2">三個整數相乘，不論先乘前兩數或後兩數，結果均相同。</span>
+              <div class="bg-black/40 p-3 rounded border border-gray-800 text-slate-300 text-base font-semibold leading-relaxed">
+                💡 巧算簡化範例：<br>
+                在計算 (-25) × (-11) × 4 時，我們可以根據乘法交換律與結合律，調整相乘的順序以方便計算：<br>
+                先算 <b class="text-emerald-400 font-bold">(-25) × 4 = -100</b><br>
+                再算 <b class="text-emerald-400 font-bold">(-100) × (-11) = 1100</b>，心算一秒完成！
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 經典迷思診斷大考驗 -->
+    <section class="bg-gray-900 p-6 rounded-2xl border border-gray-800 mb-12 shadow-lg">
+      <h3 class="text-xl font-black text-center text-rose-400 tracking-widest mb-8">
+        🎯 經典迷思診斷大考驗
+      </h3>
+
+      <div class="space-y-8">
+        
+        <!-- Q1 -->
+        <div class="p-5 rounded-xl bg-black/40 border border-gray-800 transition-all hover:border-cyan-500/50" id="diag-q1-card">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-cyan-500 text-black font-black rounded text-xs mt-1">Q1</span>
+            <div class="w-full">
+              <p class="font-bold text-white leading-relaxed">
+                計算 (-6) × 4 的值。下列哪個水位敘述與其結果完全相符？
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <button onclick="checkDiag(1, 'A', 'correct')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-850 text-white">
+                  A) 水位每天下降 6 公分，4 天後的水位變化。答案是 -24。
+                </button>
+                <button onclick="checkDiag(1, 'B', 'error-1')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-850 text-white">
+                  B) 水位每天下降 6 公分，4 天前的水位變化。答案是 24。
+                </button>
+                <button onclick="checkDiag(1, 'C', 'error-2')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  C) 水位每天上升 6 公分，4 天前的水位變化。答案是 2。
+                </button>
+                <button onclick="checkDiag(1, 'D', 'error-3')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  D) 負正相乘還是正，答案是 24。
+                </button>
+              </div>
+              <div id="diag-q1-feedback" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="p-5 rounded-xl bg-black/40 border border-gray-800 transition-all hover:border-cyan-500/50" id="diag-q2-card">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-cyan-500 text-black font-black rounded text-xs mt-1">Q2</span>
+            <div class="w-full">
+              <p class="font-bold text-white leading-relaxed">
+                計算 8 × (-9) 的值。
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <button onclick="checkDiag(2, 'A', 'error-1')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  A) 異號相乘得正，答案是 72。
+                </button>
+                <button onclick="checkDiag(2, 'B', 'correct')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  B) 正負得負，答案是 -72。
+                </button>
+                <button onclick="checkDiag(2, 'C', 'error-2')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  C) 這題是加法運算，所以是 -1。
+                </button>
+                <button onclick="checkDiag(2, 'D', 'error-3')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  D) 答案是 -17。
+                </button>
+              </div>
+              <div id="diag-q2-feedback" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="p-5 rounded-xl bg-black/40 border border-gray-800 transition-all hover:border-cyan-500/50" id="diag-q3-card">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-cyan-500 text-black font-black rounded text-xs mt-1">Q3</span>
+            <div class="w-full">
+              <p class="font-bold text-white leading-relaxed">
+                經典負負得正題：計算 (-7) × (-6) 的結果。
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <button onclick="checkDiag(3, 'A', 'error-1')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  A) 負數相乘，結果依然維持負數，所以是 -42。
+                </button>
+                <button onclick="checkDiag(3, 'B', 'error-2')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  B) 負數相加是 -13，所以答案是 -13。
+                </button>
+                <button onclick="checkDiag(3, 'C', 'correct')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  C) 負負得正，同號相乘結果是正，所以是 42。
+                </button>
+                <button onclick="checkDiag(3, 'D', 'error-3')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  D) 水位下降 7 公分，6 天後，所以是 -42。
+                </button>
+              </div>
+              <div id="diag-q3-feedback" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="p-5 rounded-xl bg-black/40 border border-gray-800 transition-all hover:border-cyan-500/50" id="diag-q4-card">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-cyan-500 text-black font-black rounded text-xs mt-1">Q4</span>
+            <div class="w-full">
+              <p class="font-bold text-white leading-relaxed">
+                任意負整數乘以 0，其乘積為何？例如：(-15) × 0 = ？
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <button onclick="checkDiag(4, 'A', 'error-1')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  A) 乘以 0 不變，所以還是 -15。
+                </button>
+                <button onclick="checkDiag(4, 'B', 'correct')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  B) 任何數（不論正負）與 0 的乘積都是 0。
+                </button>
+                <button onclick="checkDiag(4, 'C', 'error-2')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  C) 負數乘以 0 的結果是 -0，這是一個特別的數。
+                </button>
+                <button onclick="checkDiag(4, 'D', 'error-3')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  D) 只有正數乘以 0 才是 0，負數乘以 0 是無意義的。
+                </button>
+              </div>
+              <div id="diag-q4-feedback" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="p-5 rounded-xl bg-black/40 border border-gray-800 transition-all hover:border-cyan-500/50" id="diag-q5-card">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-cyan-500 text-black font-black rounded text-xs mt-1">Q5</span>
+            <div class="w-full">
+              <p class="font-bold text-white leading-relaxed">
+                連乘題：計算 (-1) × (-1) × (-1) × (-1) 的值。
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <button onclick="checkDiag(5, 'A', 'error-1')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  A) 只要有負號，結果就是負，所以是 -1。
+                </button>
+                <button onclick="checkDiag(5, 'B', 'error-2')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  B) 四個數相加是 -4。
+                </button>
+                <button onclick="checkDiag(5, 'C', 'correct')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  C) 負號共有偶數個（4個），偶數個負號相乘得正，所以答案是 1。
+                </button>
+                <button onclick="checkDiag(5, 'D', 'error-3')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  D) 1 互消，答案為 0。
+                </button>
+              </div>
+              <div id="diag-q5-feedback" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="p-5 rounded-xl bg-black/40 border border-gray-800 transition-all hover:border-cyan-500/50" id="diag-q6-card">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-cyan-500 text-black font-black rounded text-xs mt-1">Q6</span>
+            <div class="w-full">
+              <p class="font-bold text-white leading-relaxed">
+                根據特別情形，任意負整數乘以 1，其結果為何？例如：(-12) × 1 = ？
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <button onclick="checkDiag(6, 'A', 'correct')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  A) 乘以 1 等於自己本身，結果依然是 -12。
+                </button>
+                <button onclick="checkDiag(6, 'B', 'error-1')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  B) 乘以 1 會使性質符號改變，所以是 12。
+                </button>
+                <button onclick="checkDiag(6, 'C', 'error-2')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  C) 答案會變成相反數，是 12。
+                </button>
+                <button onclick="checkDiag(6, 'D', 'error-3')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  D) 任何數乘上 1 就歸為單位數 1。
+                </button>
+              </div>
+              <div id="diag-q6-feedback" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="p-5 rounded-xl bg-black/40 border border-gray-800 transition-all hover:border-cyan-500/50" id="diag-q7-card">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-cyan-500 text-black font-black rounded text-xs mt-1">Q7</span>
+            <div class="w-full">
+              <p class="font-bold text-white leading-relaxed">
+                若 a 小於 0 且 b 大於 0，請問關於 a × b 的結果，下列哪個描述一定是正確的？
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <button onclick="checkDiag(7, 'A', 'error-1')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  A) 不一定，必須看誰的絕對值比較大。
+                </button>
+                <button onclick="checkDiag(7, 'B', 'correct')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  B) 因為一正一負為異號，所以 a × b 一定小於 0 (負數)。
+                </button>
+                <button onclick="checkDiag(7, 'C', 'error-2')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  C) 因為 b 大於 0，所以相乘一定會是正數。
+                </button>
+                <button onclick="checkDiag(7, 'D', 'error-3')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  D) 相乘結果大於 0。
+                </button>
+              </div>
+              <div id="diag-q7-feedback" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="p-5 rounded-xl bg-black/40 border border-gray-800 transition-all hover:border-cyan-500/50" id="diag-q8-card">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-amber-500 text-black font-black rounded text-xs mt-1">Q8</span>
+            <div class="w-full">
+              <p class="font-bold text-white leading-relaxed">
+                巧算簡化：計算 (-25) × (-13) × 4。選出最有效率的計算過程：
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <button onclick="checkDiag(8, 'A', 'error-1')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  A) 先用筆算算出 (-25) × (-13) = 325，再用 325 × 4 = 1300。
+                </button>
+                <button onclick="checkDiag(8, 'B', 'correct')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  B) 利用交換律與結合律，先算 (-25) × 4 = -100，再乘以 (-13) 得到 1300。
+                </button>
+                <button onclick="checkDiag(8, 'C', 'error-2')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  C) 兩個負數乘一個正數，結果應該是負的，所以是 -1300。
+                </button>
+                <button onclick="checkDiag(8, 'D', 'error-3')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  D) 無法簡化，必須由左至右硬算。
+                </button>
+              </div>
+              <div id="diag-q8-feedback" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="p-5 rounded-xl bg-black/40 border border-gray-800 transition-all hover:border-cyan-500/50" id="diag-q9-card">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-cyan-500 text-black font-black rounded text-xs mt-1">Q9</span>
+            <div class="w-full">
+              <p class="font-bold text-white leading-relaxed">
+                若有兩個整數 a 與 b，已知 a × b = 0，那麼下列哪一個敘述一定正確？
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <button onclick="checkDiag(9, 'A', 'error-1')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  A) a 和 b 兩個人必須「同時」都是 0。
+                </button>
+                <button onclick="checkDiag(9, 'B', 'correct')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  B) a 或 b 至少有一個是 0。
+                </button>
+                <button onclick="checkDiag(9, 'C', 'error-2')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  C) 只有 a 可能是 0，b 不能是 0。
+                </button>
+                <button onclick="checkDiag(9, 'D', 'error-3')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  D) 兩個都不是 0，相乘也有可能等於 0。
+                </button>
+              </div>
+              <div id="diag-q9-feedback" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="p-5 rounded-xl bg-black/40 border border-gray-800 transition-all hover:border-cyan-500/50" id="diag-q10-card">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-cyan-500 text-black font-black rounded text-xs mt-1">Q10</span>
+            <div class="w-full">
+              <p class="font-bold text-white leading-relaxed">
+                任何數與 -1 相乘等於其相反數。計算 (-3) × (-1) 的值：
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <button onclick="checkDiag(10, 'A', 'error-1')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  A) -3 的相反數是它自己，所以還是 -3。
+                </button>
+                <button onclick="checkDiag(10, 'B', 'correct')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  B) 相反數為 3，因為負負得正。
+                </button>
+                <button onclick="checkDiag(10, 'C', 'error-2')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  C) 相乘等於絕對值相加，所以是 4。
+                </button>
+                <button onclick="checkDiag(10, 'D', 'error-3')" class="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-855 text-white">
+                  D) 答案是 0。
+                </button>
+              </div>
+              <div id="diag-q10-feedback" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 水庫星級競速挑戰 (10題連乘計時賽 + 歷史戰績比較) -->
+    <section class="bg-gray-900 p-6 rounded-2xl border-2 border-cyan-500 mb-12 shadow-2xl relative overflow-hidden">
+      <!-- 霓虹極簡頂端裝飾 -->
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-pink-500"></div>
+      
+      <div class="text-center mb-6">
+        <h3 class="text-2xl font-black neon-text-cyan tracking-widest uppercase">
+          🏆 水庫奧術星級競速挑戰 🏆
+        </h3>
+        <p class="text-gray-200 mt-2">
+          隨機不重複的 10 題連乘大比拼！答題速度與正確率將轉化為速度積分，快來刷新你的個人歷史紀錄！
+        </p>
+      </div>
+
+      <!-- 挑戰主框架 -->
+      <div id="game-box" class="bg-black/80 p-6 rounded-xl border border-gray-800 relative min-h-[300px] flex flex-col justify-center">
+        
+        <!-- 1. 遊戲準備開始畫面 -->
+        <div id="game-start-screen" class="text-center py-8">
+          <p class="text-lg text-gray-200 font-bold mb-6">
+            星級競速提示：每題基準 100 分。在 10 秒倒數內越快答對，額外速度加成積分越高！歷史戰績會儲存並自動進行名次比較喔！
+          </p>
+          <button onclick="startGame()" class="btn-sports-cyan px-10 py-3.5 rounded-xl font-black text-xl tracking-widest">
+            開啟極速挑戰！
+          </button>
+        </div>
+
+        <!-- 2. 答題中畫面 -->
+        <div id="game-play-screen" class="hidden">
+          
+          <!-- 上方狀態資訊 -->
+          <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
+            <span class="text-gray-300 font-bold">目前進度：<span id="game-progress" class="text-cyan-400 font-black Orbitron">1 / 10</span></span>
+            <span class="text-gray-300 font-bold">累積積分：<span id="game-score" class="text-green-400 font-black Orbitron">0</span></span>
+            <span class="text-gray-300 font-bold">剩餘時間：<span id="game-timer" class="text-pink-500 font-black Orbitron">10s</span></span>
+          </div>
+
+          <!-- 奧術算式 -->
+          <div class="text-center my-6">
+            <p class="text-gray-400 text-sm mb-2 uppercase tracking-widest font-bold">請點選正確算式答案：</p>
+            <p id="game-question" class="text-3xl font-black text-white tracking-widest Orbitron">
+              (-5) × 6 = ？
+            </p>
+          </div>
+
+          <!-- 四個選項 (一橫排排列，省正號，0無正負) -->
+          <div class="grid grid-cols-4 gap-4 mt-6" id="game-options">
+            <!-- 由 JS 動態渲染生成 -->
+          </div>
+
+          <!-- 即時作答反饋 -->
+          <div id="game-feedback" class="mt-6 p-4 rounded-lg text-center hidden font-bold"></div>
+
+          <!-- 下一題按鈕 -->
+          <div class="text-center mt-6 hidden" id="game-next-container">
+            <button onclick="nextQuestion()" class="btn-sports-cyan px-8 py-3 rounded-xl font-bold tracking-widest">
+              下一題 ➜
+            </button>
+          </div>
+
+        </div>
+
+        <!-- 3. 結算畫面 (優化按鈕名稱為「重新開啟試煉」) -->
+        <div id="game-result-screen" class="hidden">
+          <div class="text-center py-6">
+            <h4 class="text-2xl font-black neon-text-yellow mb-4" id="congrats-title">🏁 挑戰完成！挑戰成果 🏁</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 text-left max-w-4xl mx-auto">
+              
+              <!-- 本次成績 -->
+              <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800">
+                <h5 class="text-lg font-bold text-cyan-400 border-b border-gray-800 pb-2 mb-3">本次挑戰成績：</h5>
+                <p class="text-gray-100 mb-2 font-bold">正確率：<span id="result-accuracy" class="text-green-400 font-black Orbitron">0%</span></p>
+                <p class="text-gray-100 mb-2 font-bold">答對題數：<span id="result-correct-count" class="text-green-400 font-black Orbitron">0 / 10</span></p>
+                <p class="text-gray-100 mb-4 font-bold">獲得最終總分：<span id="result-total-score" class="text-yellow-400 font-black Orbitron">0</span></p>
+                
+                <!-- 新高徽章提示 -->
+                <div id="new-record-badge" class="hidden px-3 py-1 bg-yellow-500/20 text-yellow-400 border border-yellow-500 rounded-lg text-center font-bold text-sm animate-bounce">
+                  🎉 恭喜！突破個人歷史最高得分！
+                </div>
+              </div>
+
+              <!-- 歷史戰績比較表 -->
+              <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800">
+                <h5 class="text-lg font-bold text-pink-500 border-b border-gray-800 pb-2 mb-3">個人歷史戰績比較：</h5>
+                <div id="history-list" class="history-scroll space-y-2 text-sm text-gray-200">
+                  <!-- 由 JS 動態生成 -->
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 錯題檢討解析 -->
+            <div id="review-section" class="text-left max-w-2xl mx-auto mb-8">
+              <h5 class="text-lg font-bold text-pink-400 mb-3 border-b border-gray-800 pb-2">🔍 錯題檢討：</h5>
+              <div id="review-list" class="space-y-4 max-h-60 overflow-y-auto pr-2">
+                <!-- 這裡由 JS 動態更換 -->
+              </div>
+            </div>
+
+            <button onclick="startGame()" class="btn-sports-cyan px-8 py-3.5 rounded-xl font-black text-lg tracking-wider">
+              重新開啟試煉
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="text-center border-t border-gray-900 pt-8 pb-12">
+      <p class="text-cyan-400 font-bold text-large">
+        翠翎老師製作
+      </p>
+    </footer>
+
+  </div>
+
+  <script>
+    // --- 課本 4 大題型自學講堂情境文本數據 (與滑桿水位、時間參數 100% 同步連動) ---
+    const lectureData = {
+      1: `
+        <h5 class="text-large font-bold text-green-400 mb-2">【第一型：正整數 × 正整數】</h5>
+        <p class="mb-2 text-white"><b>課本水位情境：</b>水庫水位每天上升 4 公分 (記為 +4)，那麼 2 天後 (記為 +2) 水位會比現在高或低多少公分？</p>
+        <p class="text-cyan-300 font-bold"><b>解讀：</b> (+4) × (+2) = 8 (公分)，即 2 天共上升 4 + 4 = 8 公分，水位比現在高 8 公分。同號相乘乘積為正整數。</p>
+      `,
+      2: `
+        <h5 class="text-large font-bold text-green-400 mb-2">【第二型：正整數 × 負整數】</h5>
+        <p class="mb-2 text-white"><b>課本水位情境：</b>水庫水位每天上升 4 公分 (記為 +4)，那麼 2 天前 (記為 -2) 水位會比現在高或低多少公分？</p>
+        <p class="text-cyan-300 font-bold"><b>解讀：</b> (+4) × (-2) = -8 (公分)。水位天天在上升，所以 2 天前的水位，比現在「低」了 8 公分。異號相乘乘積為負整數。</p>
+      `,
+      3: `
+        <h5 class="text-large font-bold text-green-400 mb-2">【第三型：負整數 × 正整數】</h5>
+        <p class="mb-2 text-white"><b>課本水位情境：</b>水庫水位每天下降 4 公分 (記為 -4)，那麼 2 天後 (記為 +2) 水位會比現在高或低多少公分？</p>
+        <p class="text-cyan-300 font-bold"><b>解讀：</b> (-4) × (+2) = -8 (公分)。每天水位下降， 2 天後的水位總共下降了 8 公分。異號相乘乘積為負整數。</p>
+      `,
+      4: `
+        <h5 class="text-large font-bold text-green-400 mb-2">【第四型：負整數 × 負整數】</h5>
+        <p class="mb-2 text-white"><b>課本水位情境：</b>水庫水位每天下降 4 公分 (記為 -4)，那麼 2 天前 (記為 -2) 水位會比現在高或低多少公分？</p>
+        <p class="text-yellow-300 font-bold"><b>翠翠小精靈解析：</b> (-4) × (-2) = 8 (公分)。水位每天都在下降，所以 2 天前的水位，反而比現在「高」 8 公分！這便是「負負得正」的原理！</p>
+      `
+    };
+
+    const sliderA = document.getElementById('sliderA');
+    const sliderB = document.getElementById('sliderB');
+    const valADisplay = document.getElementById('valA-display');
+    const valBDisplay = document.getElementById('valB-display');
+    const calcA = document.getElementById('calcA');
+    const calcB = document.getElementById('calcB');
+    const calcResult = document.getElementById('calcResult');
+    const verbalExplanation = document.getElementById('verbalExplanation');
+    const trackStatus = document.getElementById('track-status');
+    const elfinSprite = document.getElementById('elfinSprite');
+    const elfinEyes = document.getElementById('elfinEyes');
+    const motionArc = document.getElementById('motionArc');
+
+    const waterFillPink = document.getElementById('waterFillPink');
+    const waterFillCyan = document.getElementById('waterFillCyan');
+
+    // 動態數線刻度配置 (精確適配 image_45c2dd.png，大刻度從 33至57，小刻度從 39至51，單位寬加寬)
+    const ticksContainer = document.getElementById('ticks');
+    const zeroX = 460;
+    const stepPx = 16.8; 
+
+    for (let i = -25; i <= 25; i++) {
+      const x = zeroX + i * stepPx;
+      const isMajor = i % 5 === 0; // 每 5 格繪製主要大刻度與大數字標籤
+
+      // 刻度線
+      const tick = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      tick.setAttribute("x1", x);
+      tick.setAttribute("y1", isMajor ? "33" : "39"); // 完美跨越 Y=45 主軸
+      tick.setAttribute("x2", x);
+      tick.setAttribute("y2", isMajor ? "57" : "51");
+      tick.setAttribute("stroke", isMajor ? "#ffffff" : "#64748b"); // 提高刻度線顏色對比度
+      tick.setAttribute("stroke-width", isMajor ? "3" : "1.5");
+      ticksContainer.appendChild(tick);
+
+      // 刻度數字標籤
+      if (isMajor) {
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", x);
+        text.setAttribute("y", "78");
+        text.setAttribute("fill", i === 0 ? "#ffea00" : "#cbd5e1"); // 提高數線數字對比度
+        text.setAttribute("font-size", "15");
+        text.setAttribute("font-weight", "black");
+        text.setAttribute("text-anchor", "middle");
+        text.textContent = i > 0 ? `+${i}` : i;
+        ticksContainer.appendChild(text);
+      }
+    }
+
+    // 音效
+    function playMagicSound(freq, duration) {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    // --- 同步與聯動控制 ---
+    let currentSelectedType = 1;
+
+    // 自學講堂點擊切換 (與控制台滑桿完美同步)
+    function selectType(typeId) {
+      currentSelectedType = typeId;
+      
+      // 切換講堂按鈕 active 樣式
+      document.querySelectorAll('[id^="btn-type"]').forEach(b => b.classList.remove('active'));
+      document.getElementById(`btn-type${typeId}`).classList.add('active');
+
+      // 動態替換自學解析文本
+      document.getElementById('type-lecture-content').innerHTML = lectureData[typeId];
+
+      // 根據題型，水位(A)與時間(B)數值完全連動
+      if (typeId === 1) { 
+        sliderA.value = 4; // 上升 4 公分
+        sliderB.value = 2; // 2 天後
+      } else if (typeId === 2) { 
+        sliderA.value = 4; // 上升 4 公分
+        sliderB.value = -2; // 2 天前
+      } else if (typeId === 3) { 
+        sliderA.value = -4; // 下降 4 公分
+        sliderB.value = 2; // 2 天後
+      } else if (typeId === 4) { 
+        sliderA.value = -4; // 下降 4 公分
+        sliderB.value = -2; // 2 天前
+      }
+
+      // 重繪數線與水位動態
+      updateWaterVisuals();
+      playMagicSound(550, 0.1);
+    }
+
+    // 更新水位跑道與翻譯面板 (完美對齊扁平化 Y=45 軌跡軸心)
+    function updateWaterVisuals() {
+      const a = parseInt(sliderA.value);
+      const b = parseInt(sliderB.value);
+      const result = a * b;
+
+      // 1. 更新滑桿旁的對比度數值顯示
+      const statusA = a > 0 ? '上升' : a < 0 ? '下降' : '水位不變';
+      const statusB = b > 0 ? '天後' : b < 0 ? '天前' : '現在';
+      valADisplay.innerHTML = `${a >= 0 ? '+' : ''}${a} <span class="text-xs text-cyan-300 font-bold">(${statusA} ${Math.abs(a)} 公分/日)</span>`;
+      valBDisplay.innerHTML = `${b >= 0 ? '+' : ''}${b} <span class="text-xs text-pink-300 font-bold">(${Math.abs(b)} ${statusB})</span>`;
+
+      // 2. 更新高對比算式卡
+      calcA.textContent = a >= 0 ? `(+${a})` : `(${a})`;
+      calcB.textContent = b >= 0 ? `(+${b})` : `(${b})`;
+      calcResult.textContent = result >= 0 ? `(+${result})` : `(${result})`;
+
+      // 3. 調整跑道填滿
+      if (result > 0) {
+        calcResult.className = "neon-text-green text-3xl font-black";
+        trackStatus.textContent = "水位上升 (同號得正)";
+        trackStatus.className = "text-green-400 font-bold";
+        
+        // 增高區填滿
+        const fillW = Math.min(result * stepPx, 420); // 防止溢出
+        waterFillCyan.setAttribute("x", "460");
+        waterFillCyan.setAttribute("width", fillW);
+        waterFillPink.setAttribute("width", "0");
+      } else if (result < 0) {
+        calcResult.className = "neon-text-pink text-3xl font-black";
+        trackStatus.textContent = "水位下降 (異號得負)";
+        trackStatus.className = "text-pink-400 font-bold";
+        
+        // 降低區填滿
+        const fillW = Math.min(Math.abs(result) * stepPx, 420); // 防止溢出
+        waterFillPink.setAttribute("x", 460 - fillW);
+        waterFillPink.setAttribute("width", fillW);
+        waterFillCyan.setAttribute("width", "0");
+      } else {
+        calcResult.className = "text-white text-3xl font-black";
+        trackStatus.textContent = "與現在水位同高";
+        trackStatus.className = "text-slate-300 font-bold";
+        waterFillCyan.setAttribute("width", "0");
+        waterFillPink.setAttribute("width", "0");
+      }
+
+      // 4. 白話文翻譯 (修正為精確、流暢的單行一行呈現，優化精煉字數)
+      let desc = "";
+      if (a === 0) {
+        desc = "每天水位不變 (0 公分)，所以無論是幾天前或幾天後，水位都和現在一模一樣！";
+      } else if (b === 0) {
+        desc = "時間是在「現在 (0天)」，因此當前的水位變化量就是 0 公分。";
+      } else {
+        const upDown = a > 0 ? "上升" : "下降";
+        const dayWord = b > 0 ? `${Math.abs(b)} 天後` : `${Math.abs(b)} 天前`;
+        const highLow = result > 0 ? "高" : "低";
+        desc = `每天<b>${upDown} ${Math.abs(a)} 公分</b>，${dayWord}的水位比現在<b>${highLow} ${Math.abs(result)} 公分</b>！`;
+      }
+      verbalExplanation.innerHTML = desc;
+
+      // 5. 定位精靈 (對齊 Y=45 軸心)
+      const boundedResult = Math.max(-25, Math.min(25, result));
+      const targetX = zeroX + boundedResult * stepPx;
+      elfinSprite.setAttribute("transform", `translate(${targetX}, 45)`);
+      if (a < 0) {
+        elfinEyes.setAttribute("transform", "translate(-3, 0)");
+      } else if (a > 0) {
+        elfinEyes.setAttribute("transform", "translate(3, 0)");
+      } else {
+        elfinEyes.setAttribute("transform", "translate(0, 0)");
+      }
+
+      // 6. 軌跡弧線的繪製計算 (對齊 Y=45 軸心)
+      const midX = (zeroX + targetX) / 2;
+      const arcH = Math.min(Math.abs(boundedResult) * 3, 50);
+      const controlY = 45 - arcH;
+      if (result !== 0) {
+        motionArc.setAttribute("d", `M 460 45 Q ${midX} ${controlY} ${targetX} 45`);
+        motionArc.setAttribute("stroke", result > 0 ? "#39ff14" : "#ff1493");
+      } else {
+        motionArc.setAttribute("d", "M 460 45 Q 460 45 460 45");
+      }
+    }
+
+    // 監聽手動調整滑桿
+    sliderA.addEventListener('input', () => {
+      updateWaterVisuals();
+      playMagicSound(320 + Math.abs(sliderA.value) * 50, 0.05);
+    });
+    sliderB.addEventListener('input', () => {
+      updateWaterVisuals();
+      playMagicSound(420 + Math.abs(sliderB.value) * 50, 0.05);
+    });
+
+    // 筆記區性質分頁切換
+    function showProperty(propId) {
+      document.querySelectorAll('.prop-content').forEach(c => c.classList.add('hidden'));
+      document.querySelectorAll('[id^="btn-prop"]').forEach(b => b.classList.remove('active'));
+
+      document.getElementById(`prop-content-${propId}`).classList.remove('hidden');
+      document.getElementById(`btn-prop-${propId}`).classList.add('active');
+      playMagicSound(480, 0.1);
+    }
+
+    // --- 診斷考驗問答判定 (回饋文字修正，剔除 any 數與中英夾雜) ---
+    function checkDiag(qNum, option, category) {
+      const feedbackDiv = document.getElementById(`diag-q${qNum}-feedback`);
+      const card = document.getElementById(`diag-q${qNum}-card`);
+      feedbackDiv.classList.remove('hidden');
+
+      if (category === 'correct') {
+        playMagicSound(620, 0.1);
+        setTimeout(() => playMagicSound(820, 0.15), 100);
+        card.className = "p-5 rounded-xl bg-black/40 border-2 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all";
+        
+        let txt = "";
+        switch(qNum) {
+          case 1: txt = "水位每天下降 6 公分，4 天後的水位變化。答案是 -24。代表異號相乘得負，你掌握得非常好！"; break;
+          case 2: txt = "正負得負，答案就是 -72。兩數相乘時，符號優先判定是很好的習慣喔！"; break;
+          case 3: txt = "每天下降 7 公分 (-7)，那麼 6 天前 (-6) 的水位當然會比現在「高」囉！答案是 42，負負得正完全理解！"; break;
+          case 4: txt = "0 乘以任何數，不管是正整數、負整數還是 0，結果都是 0。這是最特殊的乘法特性！"; break;
+          case 5: txt = "四個負數連乘，負號數量為偶數個 (4個)，兩兩負負得正，最後結果是 1。"; break;
+          case 6: txt = "任意整數乘以 1，都不會改變原數的值。依然是 -12，維持原本的整數單位。"; break;
+          case 7: txt = "因為一正一負為異號，所以 a × b 一定小於 0 (負數)，這與數值的絕對值大小無關！"; break;
+          case 8: txt = "利用結合律，先算 (-25) × 4 = -100，再乘 (-13)，得到 1300。這是在連乘中極高效率的運算技巧！"; break;
+          case 9: txt = "當兩個整數相乘為 0，表示「至少有一個數是 0」。這是代數運算中的重要概念。"; break;
+          case 10: txt = "任何數與 -1 相乘皆等於其相反數。-3 的相反數就是 3。"; break;
+        }
+        
+        feedbackDiv.className = "mt-4 p-4 rounded-lg bg-emerald-950/90 border border-emerald-500";
+        feedbackDiv.innerHTML = `
+          <span class="text-hint-label text-emerald-400 block mb-1">翠翠小精靈的叮嚀：</span>
+          <span class="text-hint-desc text-yellow-300 block">✨ 答對了！${txt}</span>
+        `;
+      } else {
+        playMagicSound(220, 0.3);
+        card.className = "p-5 rounded-xl bg-black/40 border-2 border-rose-500 shadow-[0_0_20px_rgba(244,63,94,0.3)] transition-all";
+        
+        let errTxt = "";
+        switch(qNum) {
+          case 1:
+            if (category === 'error-1') errTxt = "時間方向弄錯囉！「4 天前」記為負數 (-4)，但算式中乘的是正數 4。";
+            if (category === 'error-2') errTxt = "這題是乘法喔！千萬不能看成 (-6) + 4 = -2 這樣加起來。";
+            if (category === 'error-3') errTxt = "正負號判斷錯誤！負數與正數相乘（異號），乘積一定是負數才對喔！";
+            break;
+          case 2:
+            if (category === 'error-1') errTxt = "性質符號錯囉！一正一負異號相乘，乘積應該是「負數」，而非正數。";
+            if (category === 'error-2') errTxt = "小心運算符號！這是乘號「×」，別算成加法 8 + (-9) = -1 囉。";
+            if (category === 'error-3') errTxt = "九九乘法不小心記錯囉！八九是七十二 (72)，請重新演算。";
+            break;
+          case 3:
+            if (category === 'error-1') errTxt = "經典的加法直覺迷思！負數相乘不是負。天天下降 (-7)，6 天前 (-6) 水位一定較高，所以負負得正喔！";
+            if (category === 'error-2') errTxt = "看錯運算子囉！題目是 (-7) × (-6) ，不是加法相加。";
+            if (category === 'error-3') errTxt = "時間不對喔！6 天後是 +6，但題目乘的是 -6（代表 6 天前）。";
+            break;
+          case 4:
+            if (category === 'error-1') errTxt = "不對喔！乘以 1 才會是自己本身，乘以 0 無論如何必定歸零。";
+            if (category === 'error-2') errTxt = "0 沒有性質符號！數學中沒有 -0 這種寫法，請直接寫 0 喔！";
+            if (category === 'error-3') errTxt = "負整數乘以 0 依然成立！任何整數乘以 0，結果都是 0。";
+            break;
+          case 5:
+            if (category === 'error-1') errTxt = "數數看有幾個負號？這裡有 4 個負數。因為 4 是偶數，偶數個負數連乘會兩兩配對「負負得正」，最終結果是正數。";
+            if (category === 'error-2') errTxt = "這題是乘法喔！不能算成加法得 -4。";
+            if (category === 'error-3') errTxt = "數值依然存在！絕對值 1 × 1 × 1 × 1 依然是 1，只是性質符號變為正。";
+            break;
+          case 6:
+            if (category === 'error-1') errTxt = "性質符號沒有變喔！乘以「正數 1」是不會改變原本整數的正負性質的。";
+            if (category === 'error-2') errTxt = "搞混囉！乘以 -1 才會變成相反數（12）。乘以 1 則是維持原數。";
+            if (category === 'error-3') errTxt = "別與 0 搞混了！只有乘以 0 才會歸零。";
+            break;
+          case 7:
+            if (category === 'error-1') errTxt = "這是加法的規則！加法才要比絕對值大小。在乘法中「正負相乘必得負」，結果必定小於 0。";
+            if (category === 'error-2') errTxt = "正負相乘結果是負數！所以不可能大於 0。";
+            if (category === 'error-3') errTxt = "大於 0 代表正數。異號相乘得到的應是負數才對。";
+            break;
+          case 8:
+            if (category === 'error-1') errTxt = "這個方法可以，但運算較慢！觀察算式，先算 (-25) × 4 湊出整百數 -100，這才是最聰明的。";
+            if (category === 'error-2') errTxt = "性質符號判斷錯誤！兩個負數與一個正數相乘，偶數個負號「負負得正」，最終答案必為正。";
+            if (category === 'error-3') errTxt = "乘法具備交換與結合律！重新排序配對可以大幅簡化筆算時間。";
+            break;
+          case 9:
+            if (category === 'error-1') errTxt = "不需兩者皆為 0 喔！例如 5 × 0 ＝ 0 依然成立。";
+            if (category === 'error-2') errTxt = "b 也有可能是 0！例如 0 × 3 = 0，a、b 只要有一者為 0 即可成立。";
+            if (category === 'error-3') errTxt = "整數的乘積若為 0，其一必為 0。兩個非 0 整數相乘，絕對不可能是 0。";
+            break;
+          case 10:
+            if (category === 'error-1') errTxt = "相反數的意義錯囉！-3 的相反數是 3，而非它自己。";
+            if (category === 'error-2') errTxt = "運算錯誤！這是乘法，(-3) × (-1) ＝ 3，不是加法喔。";
+            if (category === 'error-3') errTxt = "只有乘以 0 才是 0！乘以 -1 是變成相反數。";
+            break;
+        }
+
+        feedbackDiv.className = "mt-4 p-4 rounded-lg bg-rose-955/90 border border-rose-500";
+        feedbackDiv.innerHTML = `
+          <span class="text-hint-label text-rose-400 block mb-1">翠翠小精靈的叮嚀：</span>
+          <span class="text-hint-desc text-pink-300 block">${errTxt}</span>
+        `;
+      }
+    }
+
+    // --- 🏆 翠翠小精靈星級競速挑戰引擎 (完全隨機不重複出題演算法) ---
+    let gameQuestions = [];
+    let gameIdx = 0;
+    let gameScore = 0;
+    let gameTimer = null;
+    let gameTimeLeft = 10;
+    let gameStartTime = 0;
+    let gameCorrectCount = 0;
+    let gameWrongList = [];
+    
+    // 歷史成績列表
+    let gameHistory = JSON.parse(localStorage.getItem('tsui_math_history') || "[]");
+
+    // 隨機洗牌
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // 動態題目產生器 (完全解決學生背答案問題，每次挑選皆隨機不重複)
+    function generateDynamicChallengeQuestions(count) {
+      const generated = [];
+      const usedFormulas = new Set();
+
+      while (generated.length < count) {
+        // 出題題型隨機選擇
+        // 0: 正*正, 1: 正*負, 2: 負*正, 3: 負*負, 4: 特殊0, 5: 特殊1或-1, 6: 連乘挑戰
+        const type = Math.floor(Math.random() * 7);
+        let n1, n2, n3 = null;
+        let qStr = "";
+        let ans = 0;
+
+        if (type === 0) {
+          n1 = Math.floor(Math.random() * 11) + 2; // 2 到 12
+          n2 = Math.floor(Math.random() * 11) + 2;
+          qStr = `${n1} × ${n2}`;
+          ans = n1 * n2;
+        } else if (type === 1) {
+          n1 = Math.floor(Math.random() * 11) + 2;
+          n2 = -(Math.floor(Math.random() * 11) + 2);
+          qStr = `${n1} × (${n2})`;
+          ans = n1 * n2;
+        } else if (type === 2) {
+          n1 = -(Math.floor(Math.random() * 11) + 2);
+          n2 = Math.floor(Math.random() * 11) + 2;
+          qStr = `(${n1}) × ${n2}`;
+          ans = n1 * n2;
+        } else if (type === 3) {
+          n1 = -(Math.floor(Math.random() * 11) + 2);
+          n2 = -(Math.floor(Math.random() * 11) + 2);
+          qStr = `(${n1}) × (${n2})`;
+          ans = n1 * n2;
+        } else if (type === 4) {
+          const zeroOnLeft = Math.random() < 0.5;
+          const randomVal = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 30) + 5);
+          if (zeroOnLeft) {
+            n1 = 0; n2 = randomVal;
+            qStr = `0 × ${n2 < 0 ? '(' + n2 + ')' : n2}`;
+          } else {
+            n1 = randomVal; n2 = 0;
+            qStr = `${n1 < 0 ? '(' + n1 + ')' : n1} × 0`;
+          }
+          ans = 0;
+        } else if (type === 5) {
+          const isNegativeOne = Math.random() < 0.5;
+          const randomVal = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 20) + 3);
+          if (isNegativeOne) {
+            n1 = -1; n2 = randomVal;
+            qStr = `(-1) × ${n2 < 0 ? '(' + n2 + ')' : n2}`;
+            ans = -n2;
+          } else {
+            n1 = 1; n2 = randomVal;
+            qStr = `1 × ${n2 < 0 ? '(' + n2 + ')' : n2}`;
+            ans = randomVal;
+          }
+        } else {
+          // 三數連乘挑戰
+          n1 = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 4) + 2);
+          n2 = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 4) + 2);
+          n3 = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 4) + 2);
+          qStr = `${n1 < 0 ? '('+n1+')' : n1} × ${n2 < 0 ? '('+n2+')' : n2} × ${n3 < 0 ? '('+n3+')' : n3}`;
+          ans = n1 * n2 * n3;
+        }
+
+        // 避免重複題目出現
+        if (usedFormulas.has(qStr)) continue;
+        usedFormulas.add(qStr);
+
+        // 智能誘答干擾項生成
+        const optsSet = new Set();
+        optsSet.add(ans);
+
+        // 干擾 1: 相反數
+        if (ans !== 0) {
+          optsSet.add(-ans);
+        } else {
+          optsSet.add(n1 || 5);
+          optsSet.add(-(n2 || 5));
+        }
+
+        // 干擾 2: 看成加法的結果
+        let addMistake = (n1 || 0) + (n2 || 0) + (n3 || 0);
+        if (addMistake === ans) addMistake += 7;
+        optsSet.add(addMistake);
+
+        // 干擾 3: 計算粗心誤差（九九乘法誤差值）
+        let closeMistake = ans + (Math.random() < 0.5 ? 10 : -10);
+        if (closeMistake === ans) closeMistake += 5;
+        optsSet.add(closeMistake);
+
+        // 確保剛好 4 個不重複選項
+        while (optsSet.size < 4) {
+          optsSet.add(ans + (Math.floor(Math.random() * 20) - 10));
+        }
+
+        generated.push({
+          q: qStr,
+          num1: n1,
+          num2: n2,
+          a: ans,
+          opts: shuffle(Array.from(optsSet))
+        });
+      }
+      return generated;
+    }
+
+    // 開始考驗 (動態新生成題目)
+    function startGame() {
+      gameScore = 0;
+      gameIdx = 0;
+      gameCorrectCount = 0;
+      gameWrongList = [];
+
+      // 每次開局全新產生 10 題
+      gameQuestions = generateDynamicChallengeQuestions(10);
+
+      document.getElementById('game-start-screen').classList.add('hidden');
+      document.getElementById('game-result-screen').classList.add('hidden');
+      document.getElementById('game-play-screen').classList.remove('hidden');
+
+      loadGameQuestion();
+    }
+
+    // 載入題目
+    function loadGameQuestion() {
+      clearInterval(gameTimer);
+
+      const feedback = document.getElementById('game-feedback');
+      feedback.classList.add('hidden');
+      document.getElementById('game-next-container').classList.add('hidden');
+
+      const current = gameQuestions[gameIdx];
+      document.getElementById('game-progress').textContent = `${gameIdx + 1} / 10`;
+      document.getElementById('game-score').textContent = gameScore;
+      document.getElementById('game-question').textContent = `${current.q} ＝ ？`;
+
+      // 渲染選項按鈕
+      const optionsContainer = document.getElementById('game-options');
+      optionsContainer.innerHTML = '';
+
+      const shuffledOpts = [...current.opts];
+      shuffledOpts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-center py-4 rounded-xl bg-gray-900 border border-gray-800 hover:bg-gray-800 hover:border-cyan-400 text-white font-black Orbitron text-lg transition-all shadow-md";
+        
+        // 正數省略 + 號，0 就是 0
+        if (opt > 0) {
+          btn.textContent = `${opt}`;
+        } else if (opt === 0) {
+          btn.textContent = "0";
+        } else {
+          btn.textContent = `${opt}`;
+        }
+
+        btn.onclick = () => submitGameAnswer(opt, btn);
+        optionsContainer.appendChild(btn);
+      });
+
+      // 10秒沙漏計時
+      gameTimeLeft = 10;
+      document.getElementById('game-timer').textContent = `${gameTimeLeft}s`;
+      document.getElementById('game-timer').className = "text-teal-400 font-black Orbitron";
+
+      gameStartTime = Date.now();
+      gameTimer = setInterval(() => {
+        gameTimeLeft--;
+        document.getElementById('game-timer').textContent = `${gameTimeLeft}s`;
+
+        if (gameTimeLeft <= 3) {
+          document.getElementById('game-timer').className = "text-rose-500 font-black Orbitron animate-pulse";
+        }
+
+        if (gameTimeLeft <= 0) {
+          clearInterval(gameTimer);
+          timeOutGameTrigger();
+        }
+      }, 1000);
+    }
+
+    // 作答判定
+    function submitGameAnswer(chosen, clickedBtn) {
+      clearInterval(gameTimer);
+
+      const current = gameQuestions[gameIdx];
+      const isCorrect = (chosen === current.a);
+      const feedback = document.getElementById('game-feedback');
+
+      // 禁用該題所有按鈕
+      const btns = document.querySelectorAll('#game-options button');
+      btns.forEach(b => b.disabled = true);
+
+      if (isCorrect) {
+        gameCorrectCount++;
+        playMagicSound(680, 0.1);
+        setTimeout(() => playMagicSound(880, 0.15), 100);
+
+        // 速度積分計算法
+        const timeTaken = (Date.now() - gameStartTime) / 1000;
+        const bonus = Math.max(0, Math.round((10 - timeTaken) * 12));
+        const finalQScore = 100 + bonus;
+        gameScore += finalQScore;
+
+        clickedBtn.className = "w-full text-center py-4 rounded-xl bg-emerald-950 border-2 border-emerald-500 text-emerald-300 font-black Orbitron text-lg shadow-[0_0_15px_rgba(57,255,20,0.4)]";
+        
+        feedback.className = "mt-6 p-4 rounded-lg text-center font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500";
+        feedback.innerHTML = `🎉 答對了！答題速度：${timeTaken.toFixed(1)} 秒，獲得 100 分 ＋ 手速加成：${bonus} 分！`;
+      } else {
+        playMagicSound(180, 0.3);
+        clickedBtn.className = "w-full text-center py-4 rounded-xl bg-rose-950 border-2 border-rose-500 text-rose-300 font-black Orbitron text-lg shadow-[0_0_15px_rgba(255,0,127,0.4)]";
+
+        // 亮起正確解答
+        btns.forEach(b => {
+          const val = parseInt(b.textContent);
+          if (val === current.a) {
+            b.className = "w-full text-center py-4 rounded-xl bg-emerald-950 border border-emerald-800 text-emerald-400 font-black Orbitron text-lg";
+          }
+        });
+
+        // 紀錄錯題
+        gameWrongList.push({
+          q: current.q,
+          num1: current.num1,
+          num2: current.num2,
+          correctAnswer: current.a,
+          userAnswer: chosen
+        });
+
+        feedback.className = "mt-6 p-4 rounded-lg text-center font-bold text-rose-300 bg-rose-950/80 border border-rose-500";
+        feedback.innerHTML = `❌ 計算錯誤！正確解答應為：${current.a}。`;
+      }
+
+      feedback.classList.remove('hidden');
+      document.getElementById('game-score').textContent = gameScore;
+      document.getElementById('game-next-container').classList.remove('hidden');
+    }
+
+    // 答題超時
+    function timeOutGameTrigger() {
+      const current = gameQuestions[gameIdx];
+      const feedback = document.getElementById('game-feedback');
+
+      const btns = document.querySelectorAll('#game-options button');
+      btns.forEach(b => {
+        b.disabled = true;
+        const val = parseInt(b.textContent);
+        if (val === current.a) {
+          b.className = "w-full text-center py-4 rounded-xl bg-emerald-950 border border-emerald-800 text-emerald-400 font-black Orbitron text-lg";
+        }
+      });
+
+      gameWrongList.push({
+        q: current.q,
+        num1: current.num1,
+        num2: current.num2,
+        correctAnswer: current.a,
+        userAnswer: "沙漏倒數超時"
+      });
+
+      playMagicSound(180, 0.3);
+      feedback.className = "mt-6 p-4 rounded-lg text-center font-bold text-rose-300 bg-rose-955/80 border border-rose-500";
+      feedback.innerHTML = `⏰ 時間到！來不及作答囉！正確解答為：${current.a}。`;
+      feedback.classList.remove('hidden');
+      document.getElementById('game-next-container').classList.remove('hidden');
+    }
+
+    // 下一題
+    function nextQuestion() {
+      gameIdx++;
+      if (gameIdx < 10) {
+        loadGameQuestion();
+      } else {
+        showGameResults();
+      }
+    }
+
+    // 結算畫面
+    function showGameResults() {
+      document.getElementById('game-play-screen').classList.add('hidden');
+      document.getElementById('game-result-screen').classList.remove('hidden');
+
+      const acc = Math.round((gameCorrectCount / 10) * 100);
+      document.getElementById('result-accuracy').textContent = `${acc}%`;
+      document.getElementById('result-correct-count').textContent = `${gameCorrectCount} / 10`;
+      document.getElementById('result-total-score').textContent = gameScore;
+
+      // 檢查是否突破歷史最高分紀錄
+      let isNewHighScore = false;
+      const prevHighScore = gameHistory.reduce((max, run) => run.score > max ? run.score : max, 0);
+      
+      if (gameHistory.length > 0 && gameScore > prevHighScore) {
+        isNewHighScore = true;
+      } else if (gameHistory.length === 0 && gameScore > 0) {
+        isNewHighScore = true; // 第一次挑戰即為新高
+      }
+
+      // 儲存本次紀錄
+      const currentRun = {
+        score: gameScore,
+        accuracy: acc,
+        correct: gameCorrectCount,
+        timestamp: new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' })
+      };
+      gameHistory.push(currentRun);
+      localStorage.setItem('tsui_math_history', JSON.stringify(gameHistory));
+
+      // 處理新高紀錄勳章
+      const badge = document.getElementById('new-record-badge');
+      if (isNewHighScore) {
+        badge.classList.remove('hidden');
+        document.getElementById('congrats-title').className = "text-2xl font-black neon-text-yellow mb-4 animate-pulse";
+        document.getElementById('congrats-title').textContent = "👑 恭喜！榮登歷史最高分王座 👑";
+        playMagicSound(800, 0.2);
+        setTimeout(() => playMagicSound(1000, 0.3), 150);
+      } else {
+        badge.classList.add('hidden');
+        document.getElementById('congrats-title').className = "text-2xl font-black neon-text-cyan mb-4";
+        document.getElementById('congrats-title').textContent = "🏁 挑戰完成！挑戰成果 🏁";
+      }
+
+      // 渲染歷史成績列表
+      const historyListContainer = document.getElementById('history-list');
+      historyListContainer.innerHTML = '';
+      
+      // 從新到舊排序
+      const displayHistory = [...gameHistory].reverse();
+      displayHistory.forEach((run, index) => {
+        const item = document.createElement('div');
+        item.className = `p-3 rounded-xl border flex justify-between items-center ${index === 0 ? 'bg-cyan-950/30 border-cyan-500' : 'bg-black/50 border-gray-800'}`;
+        
+        let medal = `第 ${displayHistory.length - index} 次`;
+        if (run.score === prevHighScore && !isNewHighScore) {
+          medal += " (👑 原最高紀錄)";
+        } else if (index === 0 && isNewHighScore) {
+          medal += " (👑 新高紀錄!)";
+        }
+
+        item.innerHTML = `
+          <span class="font-bold text-gray-100">${medal}</span>
+          <span class="Orbitron font-bold text-gray-200">得分：<b class="text-yellow-400">${run.score}</b> (正確率 ${run.accuracy}%)</span>
+        `;
+        historyListContainer.appendChild(item);
+      });
+
+      // 渲染錯題檢討
+      const reviewList = document.getElementById('review-list');
+      const reviewSection = document.getElementById('review-section');
+      reviewList.innerHTML = '';
+
+      if (gameWrongList.length === 0) {
+        reviewSection.classList.add('hidden');
+        const div = document.createElement('div');
+        div.className = "p-4 bg-emerald-950/30 text-emerald-300 border border-emerald-500 rounded-xl text-center font-bold mb-4";
+        div.textContent = "🏆 完美全對！不愧是水庫整數乘法小精靈大師，所有乘法算式都難不倒你！";
+        reviewList.appendChild(div);
+        reviewSection.classList.remove('hidden');
+      } else {
+        reviewSection.classList.remove('hidden');
+        gameWrongList.forEach((item, i) => {
+          const div = document.createElement('div');
+          div.className = "p-4 bg-black/60 rounded-lg border border-gray-800 mb-2 shadow-sm";
+
+          let hint = "";
+          const isUserStr = isNaN(item.userAnswer);
+          if (isUserStr) {
+            hint = "速度太慢超時囉！請多加強乘法心算，下次一定能更迅速地判斷！";
+          } else {
+            const absUser = Math.abs(item.userAnswer);
+            const absN1 = Math.abs(item.num1);
+            const absN2 = Math.abs(item.num2);
+
+            if (absUser === (absN1 + absN2)) {
+              hint = "你似乎不小心把「乘法」當成「加法」計算了（算成了兩數相加）！請記得這是乘法，要用乘法九九表來算喔！";
+            } else if (absUser === Math.abs(absN1 - absN2)) {
+              hint = "你好像不小心把「乘法」算成了「減法」（兩數相減）！請記得這是乘法運算，不要算成減法囉！";
+            } else {
+              const sameSign = (item.correctAnswer >= 0) === (item.userAnswer >= 0);
+              if (!sameSign) {
+                if (Math.abs(item.correctAnswer) === absUser) {
+                  hint = "你的數值計算非常完美，但性質符號選錯囉！請牢記黃金口訣：「同號得正，異號得負」！";
+                } else {
+                  hint = "性質符號與乘法九九表都不小心看錯囉！請先判斷正負性質（同號正、異號負），再仔細計算數字乘積！";
+                }
+              } else {
+                hint = "你的性質符號判斷非常正確，但數字部分（九九乘法）不小心算錯囉！請再次確認乘法表並多加細心！";
+              }
+            }
+          }
+
+          div.innerHTML = `
+            <p class="font-bold text-white text-lg">第 ${i + 1} 題：${item.q}</p>
+            <p class="text-base text-rose-400 mt-1 font-bold">你的回答：${item.userAnswer} ｜ 正確答案：<span class="text-emerald-400 font-black">${item.correctAnswer}</span></p>
+            <div class="mt-2 leading-relaxed bg-rose-955/40 p-3 rounded border border-rose-900/30">
+              <span class="text-hint-label text-rose-400 block mb-1">翠翠小精靈的叮嚀：</span>
+              <span class="text-hint-desc text-pink-300 block">${hint}</span>
+            </div>
+          `;
+          reviewList.appendChild(div);
+        });
+      }
+    }
+
+    // 初始化載入
+    window.onload = function() {
+      selectType(1);
+    }
+  </script>
+</body>
+</html>
